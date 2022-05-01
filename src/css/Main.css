@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main {
+  display: flex;
+  width: 80%;
+  margin: 30px auto;
+  border: 1px solid;
+  border-radius: 15px;
+}
+
+.main--pool {
+  border-radius: 15px;
+  width: 35%;
+  background-color: rgb(234, 232, 232);
+}
+
+.main--columns {
+  display: flex;
+  width: 65%;
+  background-color: rgb(170, 138, 98);
+  border-radius: 15px;
+}

@@ -1,0 +1,38 @@
+.pool {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.pool-searchBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+.pool-posts {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 20px;
+}
+
+.searchBar--input {
+  width: 40%;
+  height: 40px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.searchBar--input:focus {
+  width: 80%;
+}
