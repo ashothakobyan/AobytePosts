@@ -31,7 +31,6 @@ class ContainerColumn extends React.Component {
       this.setState({
         posts: newArr,
         columnDirection: "DOWN",
-        currentPage: 1,
       });
     } else {
       const newArr = this.state.posts.sort((a, b) => {
@@ -41,7 +40,6 @@ class ContainerColumn extends React.Component {
       this.setState({
         posts: newArr,
         columnDirection: "UP",
-        currentPage: 1,
       });
     }
   };
