@@ -1,0 +1,35 @@
+.popUp {
+  position: fixed;
+
+  left: 25%;
+  top: 30%;
+
+  width: 50%;
+
+  border: 1px solid #011627;
+  border-radius: 1em;
+  box-shadow: -2px 5px 5px #e71d36;
+
+  background-color: #fdfffc;
+
+  display: none;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  color: #011627;
+
+  min-height: 100px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+}
+.popUp--active {
+  display: flex;
+  opacity: 1 !important;
+}
+.popUp--button {
+  width: 100px;
+  height: 27px;
+  background-color: darkgray;
+  opacity: 0.6;
+  color: black;
+}

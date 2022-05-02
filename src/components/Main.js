@@ -6,17 +6,23 @@ import "../css/Main.css";
 import ContainerColumn from "./container/ContainerColumn";
 
 import { PostContext } from "../Contexts/PostsContext";
+import PopUp from "./PopUp";
 
 class Main extends React.Component {
   constructor() {
     super();
     this.state = {
+      popUpState: false,
       posts: fakePosts,
       postsLeft: [],
       postsRight: [],
     };
   }
-
+  changePopUpState = () => {
+    this.setState({
+      popUpState: !this.state.popUpState,
+    });
+  };
   addComment = (id, comment) => {
     const posts = this.state.posts;
 
@@ -68,7 +74,7 @@ class Main extends React.Component {
         });
       }
     } else {
-      alert("There is no more Post");
+      this.changePopUpState();
     }
   };
 
@@ -120,31 +126,43 @@ class Main extends React.Component {
 
   render() {
     return (
-      <div className="main">
-        <PostContext.Provider
-          value={{
-            addComment: this.addComment,
-            addReplayToComment: this.addReplayToComment,
-            deletePost: this.deletePost,
-          }}
-        >
-          <div className="main--pool">
-            <Pool posts={this.state.posts} />
-          </div>
-          <div className="main--columns">
-            <ContainerColumn
-              posts={this.state.postsLeft}
-              addPostToColumns={this.addPostToColumns}
-              side={"left"}
-            />
-            <ContainerColumn
-              posts={this.state.postsRight}
-              addPostToColumns={this.addPostToColumns}
-              side={"right"}
-            />
-          </div>
-        </PostContext.Provider>
-      </div>
+      <React.Fragment>
+        <div className={`main ${this.state.popUpState ? "main--opacity" : ""}`}>
+          <PostContext.Provider
+            value={{
+              addComment: this.addComment,
+              addReplayToComment: this.addReplayToComment,
+              deletePost: this.deletePost,
+              popUpState: this.state.popUpState,
+            }}
+          >
+            <div className="main--pool">
+              <Pool
+                posts={this.state.posts}
+                popUpState={this.state.popUpState}
+              />
+            </div>
+            <div className="main--columns">
+              <ContainerColumn
+                posts={this.state.postsLeft}
+                addPostToColumns={this.addPostToColumns}
+                side={"left"}
+                popUpState={this.state.popUpState}
+              />
+              <ContainerColumn
+                posts={this.state.postsRight}
+                addPostToColumns={this.addPostToColumns}
+                side={"right"}
+                popUpState={this.state.popUpState}
+              />
+            </div>
+          </PostContext.Provider>
+        </div>
+        <PopUp
+          changePopUpState={this.changePopUpState}
+          popUpState={this.state.popUpState}
+        />
+      </React.Fragment>
     );
   }
 }

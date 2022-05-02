@@ -3,6 +3,7 @@ import Comment from "../comments/Comment";
 
 import "../../css/Post.css";
 import AddComment from "../comments/AddComment";
+
 class Post extends React.Component {
   constructor(props) {
     super(props);

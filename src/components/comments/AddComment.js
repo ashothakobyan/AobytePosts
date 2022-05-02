@@ -50,13 +50,16 @@ class AddComment extends React.Component {
       return (el = i);
     });
     const { disabled, column } = this.props;
+    const { popUpState } = this.context;
     return (
       <div className="post--addComment">
         <img
           alt=""
           src={this.state.addCommentState ? closeIcon : addIcon}
           className="addComment--img"
-          onClick={!disabled || column ? this.changeAddState : null}
+          onClick={
+            (!disabled || column) && !popUpState ? this.changeAddState : null
+          }
         />
         <div
           className={`addComment--container ${

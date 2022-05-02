@@ -7,7 +7,9 @@ import "../../css/Comment.css";
 import CommentReplay from "./CommentReplay";
 import AddReplay from "./AddReplay";
 import SmileyIcons from "./SmileyIcons";
+import { PostContext } from "../../Contexts/PostsContext";
 class Comment extends React.Component {
+  static contextType = PostContext;
   constructor() {
     super();
     this.state = {
@@ -37,6 +39,7 @@ class Comment extends React.Component {
 
   render() {
     const { comment, disabled, column } = this.props;
+    const { popUpState } = this.context;
     return (
       <div className="comment">
         <div className="comment--container">
@@ -66,11 +69,15 @@ class Comment extends React.Component {
         <img
           className="comment--replayIcon"
           src={replayIcon}
-          onClick={!disabled || column ? this.changeReplayState : null}
+          onClick={
+            (!disabled || column) && !popUpState ? this.changeReplayState : null
+          }
           alt=""
         />
         <img
-          onClick={!disabled || column ? this.changeSmileyState : null}
+          onClick={
+            (!disabled || column) && !popUpState ? this.changeSmileyState : null
+          }
           src={this.state.smileySrc}
           className="smileyIcon"
           alt=""

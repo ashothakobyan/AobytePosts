@@ -42,11 +42,14 @@ class Pool extends React.Component {
     this.setState({ currentPage: number });
   };
   render() {
+    const { popUpState } = this.props;
     return (
       <div className="pool">
         <div className="pool-searchBar">
           <input
-            onChange={(e) => this.filterPosts(e.target.value)}
+            onChange={(e) =>
+              !popUpState ? this.filterPosts(e.target.value) : null
+            }
             placeholder="...Search"
             type="text"
             className="searchBar--input"

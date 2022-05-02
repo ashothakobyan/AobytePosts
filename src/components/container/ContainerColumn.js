@@ -46,7 +46,7 @@ class ContainerColumn extends React.Component {
     }
   };
   render() {
-    const { posts, side } = this.props;
+    const { posts, side, popUpState } = this.props;
     const { currentPage, postsPerPage } = this.state;
 
     return (
@@ -55,14 +55,14 @@ class ContainerColumn extends React.Component {
           <img
             className="header--addIcon"
             src={addIcon}
-            onClick={this.addPost}
+            onClick={!popUpState ? this.addPost : null}
             alt=""
           />
 
           <img
             className="header--upDown"
             src={upDown}
-            onClick={this.upToDown}
+            onClick={!popUpState ? this.upToDown : null}
             alt=""
           />
         </div>

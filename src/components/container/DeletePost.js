@@ -8,7 +8,7 @@ class DeletePost extends React.Component {
   static contextType = PostContext;
 
   render() {
-    const { deletePost } = this.context;
+    const { deletePost, popUpState } = this.context;
     const { postId, side, average } = this.props;
 
     return (
@@ -22,9 +22,13 @@ class DeletePost extends React.Component {
         </div>
         <img
           className="deletePost--icon"
-          onClick={() => {
-            deletePost(postId, side);
-          }}
+          onClick={
+            !popUpState
+              ? () => {
+                  deletePost(postId, side);
+                }
+              : null
+          }
           src={deleteIcon}
           alt=""
         />

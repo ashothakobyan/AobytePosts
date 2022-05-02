@@ -10,7 +10,9 @@
   border: 1px solid;
   border-radius: 15px;
 }
-
+.main--opacity {
+  opacity: 0.2;
+}
 .main--pool {
   border-radius: 15px;
   width: 35%;
