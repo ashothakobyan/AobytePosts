@@ -3,10 +3,6 @@ import React from "react";
 import "../../css/Pagination.css";
 
 class Pagination extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   pageNumbers = () => {
     const { postsPerPage, totalPosts } = this.props;
     let pageNumbersArr = [];

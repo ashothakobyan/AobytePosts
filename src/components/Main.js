@@ -57,13 +57,13 @@ class Main extends React.Component {
       })[0];
       addingPost.disabled = true;
       if (side === "left") {
-        const newPostsLeft = this.state.postsLeft;
+        const newPostsLeft = [...this.state.postsLeft];
         newPostsLeft.push(addingPost);
         this.setState({
           postsLeft: newPostsLeft,
         });
       } else if (side === "right") {
-        const newPostsRight = this.state.postsRight;
+        const newPostsRight = [...this.state.postsRight];
         newPostsRight.push(addingPost);
 
         this.setState({

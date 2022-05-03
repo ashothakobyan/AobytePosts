@@ -10,10 +10,11 @@ class ContainerColumn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...this.props,
       postsPerPage: 4,
       currentPage: 1,
       columnDirection: "UP",
+      filteredPosts: [],
+      postsLengthForPaginate: this.props.posts.length,
     };
   }
   addPost = () => {
@@ -24,28 +25,69 @@ class ContainerColumn extends React.Component {
   };
   upToDown = () => {
     if (this.state.columnDirection === "UP") {
-      const newArr = this.state.posts.sort((a, b) => {
+      let newArr = this.props.posts.sort((a, b) => {
         return a.average - b.average;
       });
+      if (newArr.length > this.state.postsPerPage) {
+        newArr = postPerPage(
+          this.state.currentPage,
+          this.state.postsPerPage,
+          newArr
+        );
+      }
 
       this.setState({
-        posts: newArr,
+        filteredPosts: newArr,
         columnDirection: "DOWN",
       });
     } else {
-      const newArr = this.state.posts.sort((a, b) => {
+      let newArr = this.props.posts.sort((a, b) => {
         return b.average - a.average;
       });
-
+      if (newArr.length > this.state.postsPerPage) {
+        newArr = postPerPage(
+          this.state.currentPage,
+          this.state.postsPerPage,
+          newArr
+        );
+      }
       this.setState({
-        posts: newArr,
+        filteredPosts: newArr,
         columnDirection: "UP",
       });
     }
   };
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    if (prevState.currentPage !== this.state.currentPage) {
+      const { currentPage, postsPerPage } = this.state;
+      const { posts } = this.props;
+      const filteredPosts = postPerPage(currentPage, postsPerPage, posts);
+      return filteredPosts;
+    }
+    if (prevProps.posts.length !== this.props.posts.length) {
+      if (this.props.posts.length > this.state.postsPerPage) {
+        const { currentPage, postsPerPage } = this.state;
+        const { posts } = this.props;
+        const filteredPosts = postPerPage(currentPage, postsPerPage, posts);
+        return filteredPosts;
+      }
+      return this.props.posts;
+    }
+
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (snapshot !== null) {
+      this.setState({
+        filteredPosts: snapshot,
+      });
+    }
+  }
   render() {
     const { posts, side, popUpState } = this.props;
-    const { currentPage, postsPerPage } = this.state;
+    const { currentPage, postsPerPage, filteredPosts } = this.state;
 
     return (
       <div className={`containerColumn ${this.props.side}`}>
@@ -65,7 +107,7 @@ class ContainerColumn extends React.Component {
           />
         </div>
         <div className="containerColumn--posts">
-          {postPerPage(currentPage, postsPerPage, posts).map((post) => (
+          {filteredPosts?.map((post) => (
             <React.Fragment key={post.id}>
               <Post post={post} column={true} />
               <DeletePost side={side} postId={post.id} average={post.average} />
