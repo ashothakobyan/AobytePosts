@@ -11,7 +11,9 @@ class Pool extends React.Component {
     this.state = {
       postsPerPage: 4,
       currentPage: 1,
-      filteredPosts: this.props.posts,
+      posts: this.props.posts,
+      filteredPosts: null,
+      postsLengthForPaginate: this.props.posts.length,
     };
   }
 
@@ -28,21 +30,53 @@ class Pool extends React.Component {
           ) {
             return comment;
           }
+          return false;
         });
         if (filteredComments.length) {
           return post;
         }
+        return false;
       }
     });
+    const filteredPosts = postPerPage(
+      this.state.currentPage,
+      this.state.postsPerPage,
+      filteredPostsArr
+    );
     this.setState({
-      filteredPosts: filteredPostsArr,
+      filteredPosts: filteredPosts,
+      postsLengthForPaginate: filteredPostsArr.length,
     });
   };
   paginate = (number) => {
     this.setState({ currentPage: number });
   };
+  componentDidMount() {
+    const { currentPage, postsPerPage, posts } = this.state;
+    const filteredPosts = postPerPage(currentPage, postsPerPage, posts);
+    this.setState({
+      filteredPosts: filteredPosts,
+    });
+  }
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    if (prevState.currentPage !== this.state.currentPage) {
+      const { currentPage, postsPerPage, posts } = this.state;
+      const filteredPosts = postPerPage(currentPage, postsPerPage, posts);
+      return filteredPosts;
+    }
+    return null;
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (snapshot !== null) {
+      this.setState({
+        filteredPosts: snapshot,
+      });
+    }
+  }
   render() {
     const { popUpState } = this.props;
+    const { currentPage, postsPerPage, filteredPosts, postsLengthForPaginate } =
+      this.state;
     return (
       <div className="pool">
         <div className="pool-searchBar">
@@ -56,18 +90,14 @@ class Pool extends React.Component {
           />
         </div>
         <div className="pool-posts">
-          {postPerPage(
-            this.state.currentPage,
-            this.state.postsPerPage,
-            this.state.filteredPosts
-          ).map((post) => (
+          {filteredPosts?.map((post) => (
             <Post key={post.id} post={post} />
           ))}
         </div>
         <Pagination
-          postsPerPage={this.state.postsPerPage}
-          totalPosts={this.state.filteredPosts.length}
-          currentPage={this.state.currentPage}
+          postsPerPage={postsPerPage}
+          totalPosts={postsLengthForPaginate}
+          currentPage={currentPage}
           paginate={this.paginate}
         />
       </div>

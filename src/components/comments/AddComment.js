@@ -33,7 +33,7 @@ class AddComment extends React.Component {
     if (this.state.inputValue) {
       const { addComment } = this.context;
       const comment = {
-        rate: this.state.rate,
+        rate: Number(this.state.rate),
         context: this.state.inputValue,
         replay: [],
       };
