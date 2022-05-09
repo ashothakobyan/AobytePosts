@@ -1,7 +1,8 @@
 import React from "react";
-import addIcon from "../../assets/add-icon.png";
-import closeIcon from "../../assets/close-icon.png";
-import { PostContext } from "../../Contexts/PostsContext";
+import addIcon from "../../../assets/add-icon.png";
+import closeIcon from "../../../assets/close-icon.png";
+import { PostContext } from "../../../Contexts/PostsContext";
+import styles from "./AddComment.module.css";
 
 class AddComment extends React.Component {
   static contextType = PostContext;
@@ -52,22 +53,22 @@ class AddComment extends React.Component {
     const { disabled, column } = this.props;
     const { popUpState } = this.context;
     return (
-      <div className="post--addComment">
+      <div className={styles.addComment}>
         <img
           alt=""
           src={this.state.addCommentState ? closeIcon : addIcon}
-          className="addComment--img"
+          className={styles.img}
           onClick={
             (!disabled || column) && !popUpState ? this.changeAddState : null
           }
         />
         <div
-          className={`addComment--container ${
-            this.state.addCommentState ? "activeComment" : ""
+          className={`${styles.container} ${
+            this.state.addCommentState ? styles.activeComment : ""
           }`}
         >
           <input
-            className="addComment--input"
+            className={styles.input}
             onChange={(e) => this.changeInputValue(e.target.value)}
             value={this.state.inputValue}
           />

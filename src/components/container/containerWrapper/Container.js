@@ -1,14 +1,14 @@
 import React from "react";
-import { PostContext } from "../../Contexts/PostsContext";
-import ContainerColumn from "./ContainerColumn";
-
+import { PostContext } from "../../../Contexts/PostsContext";
+import ContainerColumn from "../containerColumn/ContainerColumn";
+import styles from "./Container.module.css";
 class Container extends React.Component {
   static contextType = PostContext;
   render() {
     const { postsLeft, postsRight, addPostToColumns } = this.props;
     const { popUpState } = this.context;
     return (
-      <div className="main--columns">
+      <div className={styles.columns}>
         <ContainerColumn
           posts={postsLeft}
           addPostToColumns={addPostToColumns}

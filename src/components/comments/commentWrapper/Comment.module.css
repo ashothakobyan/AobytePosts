@@ -1,0 +1,51 @@
+.comment {
+  display: flex;
+  gap: 0 5px;
+}
+
+.context {
+  display: flex;
+  font-size: 13px;
+  font-weight: 100;
+}
+
+.rate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  background-color: gold;
+  font-size: 8px;
+}
+.bad {
+  background-color: red;
+}
+.normal {
+  background-color: yellow;
+}
+.good {
+  background-color: green;
+}
+.reply {
+  font-size: 12px;
+  margin-left: 50%;
+  display: flex;
+  width: 50%;
+}
+
+.replayIcon {
+  width: 15px;
+  height: 15px;
+}
+.smileyIcon {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+}
+
+.smileyIcon,
+.replayIcon {
+  cursor: pointer;
+}

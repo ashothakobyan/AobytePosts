@@ -1,102 +1,75 @@
 import React from "react";
-import Post from "../reusable/Post";
 
-import "../../css/Pool.css";
-import Pagination from "../Pagination/Pagination";
+import styles from "./Pool.module.css";
+
 import { postPerPage } from "../Pagination/PaginationFunctions";
+import { posts_per_page_pool } from "../../config/config";
+import { filterPosts } from "../../helperFunctions/helperFunctions";
+import Post from "../reusable/post/Post";
+import Pagination from "../reusable/Pagination/Pagination";
 
 class Pool extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      postsPerPage: 4,
+      inputValue: "",
       currentPage: 1,
       posts: this.props.posts,
-      filteredPosts: null,
-      postsLengthForPaginate: this.props.posts.length,
     };
   }
 
-  filterPosts = (value) => {
-    const filteredPostsArr = this.props.posts.filter((post) => {
-      if (post.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())) {
-        return post;
-      } else {
-        const filteredComments = post.comments.filter((comment) => {
-          if (
-            comment.context
-              .toLocaleLowerCase()
-              .includes(value.toLocaleLowerCase())
-          ) {
-            return comment;
-          }
-          return false;
-        });
-        if (filteredComments.length) {
-          return post;
-        }
-        return false;
-      }
-    });
-    const filteredPosts = postPerPage(
-      this.state.currentPage,
-      this.state.postsPerPage,
-      filteredPostsArr
-    );
-    this.setState({
-      filteredPosts: filteredPosts,
-      postsLengthForPaginate: filteredPostsArr.length,
-    });
-  };
   paginate = (number) => {
     this.setState({ currentPage: number });
   };
   componentDidMount() {
-    const { currentPage, postsPerPage, posts } = this.state;
-    const filteredPosts = postPerPage(currentPage, postsPerPage, posts);
+    const { currentPage, posts } = this.state;
+    const filteredPosts = postPerPage(currentPage, posts_per_page_pool, posts);
     this.setState({
       filteredPosts: filteredPosts,
     });
   }
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    if (prevState.currentPage !== this.state.currentPage) {
-      const { currentPage, postsPerPage, posts } = this.state;
-      const filteredPosts = postPerPage(currentPage, postsPerPage, posts);
-      return filteredPosts;
-    }
-    return null;
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (snapshot !== null) {
-      this.setState({
-        filteredPosts: snapshot,
-      });
-    }
-  }
+
+  onChangeInputValue = (value) => {
+    this.setState({
+      inputValue: value,
+    });
+  };
+  onSearchPOsts = () => {
+    const { posts, inputValue, currentPage } = this.state;
+    const filteredPostsArr = filterPosts(posts, inputValue);
+    const filteredPosts = postPerPage(
+      currentPage,
+      posts_per_page_pool,
+      filteredPostsArr
+    );
+    return filteredPosts;
+  };
   render() {
     const { popUpState } = this.props;
-    const { currentPage, postsPerPage, filteredPosts, postsLengthForPaginate } =
-      this.state;
+    const { currentPage, posts, inputValue } = this.state;
     return (
-      <div className="pool">
-        <div className="pool-searchBar">
+      <div className={styles.pool}>
+        <div className={styles.searchBar}>
           <input
-            onChange={(e) =>
-              !popUpState ? this.filterPosts(e.target.value) : null
+            onChange={
+              !popUpState
+                ? (e) => this.onChangeInputValue(e.target.value)
+                : null
             }
+            value={inputValue}
             placeholder="...Search"
             type="text"
-            className="searchBar--input"
+            className={styles.input}
           />
         </div>
-        <div className="pool-posts">
-          {filteredPosts?.map((post) => (
+        <div className={styles.posts}>
+          {this.onSearchPOsts().map((post) => (
             <Post key={post.id} post={post} />
           ))}
         </div>
         <Pagination
-          postsPerPage={postsPerPage}
-          totalPosts={postsLengthForPaginate}
+          postsPerPage={posts_per_page_pool}
+          totalPosts={filterPosts(posts, inputValue).length}
           currentPage={currentPage}
           paginate={this.paginate}
         />

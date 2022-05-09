@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../css/Pagination.css";
+import styles from "./Pagination.module.css";
 
 class Pagination extends React.Component {
   pageNumbers = () => {
@@ -14,12 +14,12 @@ class Pagination extends React.Component {
   render() {
     const { currentPage, paginate } = this.props;
     return (
-      <div className="pagination">
+      <div className={styles.pagination}>
         {this.pageNumbers().map((number) => {
           return (
             <div
-              className={`pagination--number ${
-                currentPage === number ? "active" : ""
+              className={`${styles.number} ${
+                currentPage === number ? styles.active : ""
               }`}
               key={number}
               onClick={currentPage !== number ? () => paginate(number) : null}

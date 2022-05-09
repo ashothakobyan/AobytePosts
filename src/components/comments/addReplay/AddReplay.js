@@ -1,8 +1,8 @@
 import React from "react";
-import addIcon from "../../assets/add-icon.png";
+import addIcon from "../../../assets/add-icon.png";
 
-import { PostContext } from "../../Contexts/PostsContext";
-
+import { PostContext } from "../../../Contexts/PostsContext";
+import style from "./AddReplay.module.css";
 class AddReplay extends React.Component {
   static contextType = PostContext;
   constructor(props) {
@@ -32,19 +32,19 @@ class AddReplay extends React.Component {
   render() {
     return (
       <div
-        className={`comment--addReplay ${
-          this.props.replayState ? "replayActive" : ""
+        className={`${style.addReplay} ${
+          this.props.replayState ? style.replayActive : ""
         }`}
       >
         <input
           value={this.state.replayInputValue}
-          className="addReplay--input"
+          className={style.input}
           onChange={(e) => {
             this.changeReplayInputValue(e.target.value);
           }}
         />
         <img
-          className="addReplay--img"
+          className={style.img}
           src={addIcon}
           alt=""
           onClick={this.addReplay}

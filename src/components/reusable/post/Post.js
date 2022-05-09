@@ -1,8 +1,8 @@
 import React from "react";
-import Comment from "../comments/Comment";
+import Comment from "../../comments/commentWrapper/Comment";
 
-import "../../css/Post.css";
-import AddComment from "../comments/AddComment";
+import styles from "./Post.module.css";
+import AddComment from "../../comments/addComment/AddComment";
 
 class Post extends React.Component {
   render() {
@@ -10,12 +10,12 @@ class Post extends React.Component {
 
     return (
       <div
-        className={`post ${column ? "column" : ""} ${
-          !column && post.disabled ? "disabled" : ""
+        className={`${styles.post} ${column ? styles.column : ""} ${
+          !column && post.disabled ? styles.disabled : ""
         }`}
       >
-        <h6 className="post--title">{post.title}</h6>
-        <div className="post--comments">
+        <h6 className={styles.title}>{post.title}</h6>
+        <div className={styles.comments}>
           {post.comments.map((comment, index) => (
             <Comment
               key={index}

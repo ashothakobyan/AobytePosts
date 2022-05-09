@@ -1,0 +1,15 @@
+.emojisActive {
+  display: flex !important;
+}
+
+.container {
+  display: none;
+  gap: 0 5px;
+}
+.emoji:hover {
+  cursor: pointer;
+}
+.emoji {
+  border-radius: 50%;
+  width: 15px;
+}

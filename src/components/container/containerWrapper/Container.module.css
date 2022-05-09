@@ -1,0 +1,6 @@
+.columns {
+  display: flex;
+  width: 65%;
+  background-color: rgb(170, 138, 98);
+  border-radius: 15px;
+}

@@ -10,18 +10,11 @@
   border: 1px solid;
   border-radius: 15px;
 }
-.main--opacity {
+.opacity {
   opacity: 0.2;
 }
-.main--pool {
+.pool {
   border-radius: 15px;
   width: 35%;
   background-color: rgb(234, 232, 232);
-}
-
-.main--columns {
-  display: flex;
-  width: 65%;
-  background-color: rgb(170, 138, 98);
-  border-radius: 15px;
 }

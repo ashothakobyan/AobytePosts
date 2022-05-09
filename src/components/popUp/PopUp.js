@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/PopUp.css";
+import "./PopUp.css";
 class PopUp extends React.Component {
   render() {
     const { popUpState, changePopUpState } = this.props;

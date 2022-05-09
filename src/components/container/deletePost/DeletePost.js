@@ -1,8 +1,8 @@
 import React from "react";
-import deleteIcon from "../../assets/delete-icon.png";
-import { PostContext } from "../../Contexts/PostsContext";
+import deleteIcon from "../../../assets/delete-icon.png";
+import { PostContext } from "../../../Contexts/PostsContext";
 
-import "../../css/DeletePost.css";
+import styles from "./DeletePost.module.css";
 
 class DeletePost extends React.Component {
   static contextType = PostContext;
@@ -12,16 +12,16 @@ class DeletePost extends React.Component {
     const { postId, side, average } = this.props;
 
     return (
-      <div className="deletePost">
+      <div className={styles.deletePost}>
         <div
-          className={`deletePost--rate ${
-            average < 3 ? "bad" : average < 4 ? "normal" : "good"
+          className={`${styles.rate} ${
+            average < 3 ? styles.bad : average < 4 ? styles.normal : styles.good
           }`}
         >
           {average.toFixed(2)}
         </div>
         <img
-          className="deletePost--icon"
+          className={styles.icon}
           onClick={
             !popUpState
               ? () => {

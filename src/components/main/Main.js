@@ -1,10 +1,11 @@
 import React from "react";
-import Pool from "./pool/Pool";
-import { PostContext } from "../Contexts/PostsContext";
-import PopUp from "./PopUp";
-import Container from "./container/Container";
+import Pool from "../pool/Pool";
+import { PostContext } from "../../Contexts/PostsContext";
+import PopUp from "../popUp/PopUp";
 
-import "../css/Main.css";
+import styles from "./Main.module.css";
+import { changePostAverageRate } from "../../helperFunctions/helperFunctions";
+import Container from "../container/containerWrapper/Container";
 
 class Main extends React.Component {
   constructor() {
@@ -25,7 +26,7 @@ class Main extends React.Component {
 
     let filteredPost = posts.find((post) => post.id === id);
     filteredPost.comments.push(comment);
-    filteredPost = this.changePostAverageRate(filteredPost);
+    filteredPost = changePostAverageRate(filteredPost);
     this.setState({
       posts: posts,
     });
@@ -95,26 +96,19 @@ class Main extends React.Component {
       });
     }
   };
-  changePostAverageRate = (post) => {
-    let average = 0;
-    post.comments.forEach((comment) => (average += comment.rate));
 
-    post.average = average / post.comments.length;
-
-    return post;
-  };
   getData = async () => {
-    const { fakePosts } = await import("../fakeData/FakeData");
+    const { fakePosts } = await import("../../fakeData/FakeData");
     return fakePosts;
   };
   componentDidMount() {
     this.getData().then((posts) => {
-      const PostWithAverage = posts.map((post) => {
-        const changedPost = this.changePostAverageRate(post);
+      const postWithAverage = posts.map((post) => {
+        const changedPost = changePostAverageRate(post);
         return changedPost;
       });
       this.setState({
-        posts: PostWithAverage,
+        posts: postWithAverage,
       });
     });
   }
@@ -125,7 +119,9 @@ class Main extends React.Component {
       <React.Fragment>
         {posts ? (
           <>
-            <div className={`main ${popUpState ? "main--opacity" : ""}`}>
+            <div
+              className={`${styles.main} ${popUpState ? styles.opacity : ""}`}
+            >
               <PostContext.Provider
                 value={{
                   addComment: this.addComment,
@@ -134,7 +130,7 @@ class Main extends React.Component {
                   popUpState: popUpState,
                 }}
               >
-                <div className="main--pool">
+                <div className={styles.pool}>
                   <Pool posts={posts} popUpState={popUpState} />
                 </div>
 

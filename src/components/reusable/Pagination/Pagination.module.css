@@ -5,7 +5,7 @@
   justify-content: center;
 }
 
-.pagination--number {
+.number {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +15,7 @@
   background-color: rgb(247, 243, 243);
 }
 
-.pagination--number:hover {
+.number:hover {
   cursor: pointer;
   background-color: silver;
 }
@@ -23,6 +23,6 @@
 .active {
   background-color: rgb(63, 62, 62);
 }
-.active:hover {
+.hover {
   background-color: rgb(63, 62, 62);
 }

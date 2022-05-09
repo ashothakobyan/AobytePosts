@@ -1,0 +1,20 @@
+.replayActive {
+  display: flex !important;
+}
+.img :hover {
+  cursor: pointer;
+}
+.addReplay {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 0 10px;
+}
+.input {
+  width: 50%;
+}
+
+.img {
+  width: 15px;
+  height: 15px;
+}
