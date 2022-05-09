@@ -1,4 +1,4 @@
-import Validator from "./components/Validator";
+import Validator from "./components/validator/Validator";
 
 function App() {
   return (

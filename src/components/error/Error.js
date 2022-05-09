@@ -1,9 +1,9 @@
 import React from "react";
-import "../css/Error.css";
+import styles from "./Error.module.css";
 class Error extends React.Component {
   render() {
     const { massage } = this.props;
-    return <h4 className="errorMassage">{massage}</h4>;
+    return <h4 className={styles.errorMassage}>{massage}</h4>;
   }
 }
 

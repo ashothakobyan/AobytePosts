@@ -22,11 +22,11 @@
   min-height: 100px;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
 }
-.popUp--active {
+.active {
   display: flex;
   opacity: 1 !important;
 }
-.popUp--button {
+.button {
   width: 100px;
   height: 27px;
   background-color: darkgray;
