@@ -2,7 +2,7 @@ import React from "react";
 
 import styles from "./Pool.module.css";
 
-import { postPerPage } from "../Pagination/PaginationFunctions";
+import { postPerPage } from "../reusable/Pagination/PaginationFunctions";
 import { posts_per_page_pool } from "../../config/config";
 import { filterPosts } from "../../helperFunctions/helperFunctions";
 import Post from "../reusable/post/Post";
