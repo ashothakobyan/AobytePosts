@@ -1,0 +1,13 @@
+.attributeElement {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: end;
+}
+.input {
+  height: 20px;
+  width: 50px;
+  border-radius: 5px;
+  border: 0;
+  align-self: flex-end;
+}

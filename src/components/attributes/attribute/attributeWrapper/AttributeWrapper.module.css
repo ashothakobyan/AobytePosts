@@ -1,0 +1,7 @@
+.attributeWrapper {
+  align-items: flex-end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: flex-end;
+  gap: 5px;
+}

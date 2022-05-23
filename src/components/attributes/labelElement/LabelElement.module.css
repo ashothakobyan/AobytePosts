@@ -1,0 +1,12 @@
+.labelElement {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.input {
+  width: 70%;
+  height: 20px;
+  border-radius: 5px;
+  border: 0;
+}

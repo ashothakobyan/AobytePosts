@@ -1,0 +1,26 @@
+.sidebar {
+  align-items: center;
+  display: flex;
+  width: 300px;
+  border: 1px solid;
+  flex-direction: column;
+  padding: 20px 0;
+  border-radius: 15px;
+  background-color: rgb(235, 235, 230);
+  justify-content: space-evenly;
+}
+
+.button {
+  width: 75%;
+  height: 50px;
+  border: 1px solid;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(52, 183, 183);
+}
+.button:hover {
+  cursor: pointer;
+  background-color: gray;
+}

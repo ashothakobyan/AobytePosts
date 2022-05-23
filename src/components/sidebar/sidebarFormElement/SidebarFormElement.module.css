@@ -1,0 +1,14 @@
+.sidebarFormElement {
+  width: 75%;
+  height: 50px;
+  border: 1px solid;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(232, 252, 252);
+}
+.sidebarFormElement:hover {
+  cursor: pointer;
+  background-color: gray;
+}
